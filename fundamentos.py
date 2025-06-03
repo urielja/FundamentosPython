@@ -13,8 +13,14 @@ if __name__== "__main__":
     print("-----Operador Logicos-----")
     print("True and True",True and True)
     print("True or False",True or False)
+    print("Not False", not False)
     print("-----Operador de comparacion-----")
     print("5 == 5",5 == 5)    
+    print("10 == 5",10 != 5)    
+    print("2 < 5", 2 < 5)    
+    print("2 <= 5", 5 <= 5)   
+    print("2 > 5", 2 > 5)   
+    print("2 >= 5", 2 >= 5)   
     #Comentario
 
     '''Comentario con 
