@@ -14,6 +14,22 @@ if __name__== "__main__":
     print("True and True",True and True)
     print("True or False",True or False)
     print("Not False", not False)
+
+    print("-----Tablas de verdad-----")
+    print("-----AND-----")
+    print("True and True",True and True)
+    print("True and False",True and False)
+    print("False and True",False and True)
+    print("False and False",False and False)
+    print("-----OR-----")
+    print("True or False",True or False)
+    print("False or True",False or True)
+    print("False or False",False or False)
+    print("-----Not-----")
+    print("False or False",False or False)
+    print("Not False", not False)
+    print("Not True", not True)
+
     print("-----Operador de comparacion-----")
     print("5 == 5",5 == 5)    
     print("10 == 5",10 != 5)    
@@ -21,6 +37,7 @@ if __name__== "__main__":
     print("2 <= 5", 5 <= 5)   
     print("2 > 5", 2 > 5)   
     print("2 >= 5", 2 >= 5)   
+
     #Comentario
 
     '''Comentario con 
