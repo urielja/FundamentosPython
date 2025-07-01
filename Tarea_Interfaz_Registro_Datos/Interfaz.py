@@ -22,52 +22,57 @@ def guardar():
     aficiones_seleccionadas = [k for k, v in aficiones_vars.items() if v.get() == 1]
     datos["Aficiones"] = ", ".join(aficiones_seleccionadas)
 
-        # Guardar en CSV
+    # Guardar en CSV
     archivo = "datos_formulario.csv"
+    # verifica si el archivo ya existe
     escribir_encabezados = not os.path.exists(archivo)
+    #agrega datos sin borrar anteriores
     with open(archivo, mode="a", newline="", encoding="utf-8") as f:
+        #con ditwriter escribe desde diccionarios
         writer = csv.DictWriter(f, fieldnames=datos.keys())
-
+        #Si es la primera vez (archivo nuevo),
+        # escribe la primera línea con los encabezados.
         if escribir_encabezados:
             writer.writeheader()
-
+        #escribe una línea con los datos capturados.
         writer.writerow(datos)
 
     messagebox.showinfo("Éxito", "Datos guardados correctamente.")
     mostrar_datos_csv(archivo)
 
 def mostrar_datos_csv(archivo):
+    #Crea una ventana hija
     ventana = Toplevel(root)
     ventana.title("Datos Guardados")
     ventana.geometry("700x300")
-
+    #se abre el archivo en modo lectura
     with open(archivo, newline='', encoding="utf-8") as f:
         reader = csv.reader(f)
         filas = list(reader)
-
+    #checa si hay filas de lo contrario lanza mensaje y detiene ejecucion
     if not filas:
         Label(ventana, text="No hay datos en el archivo").pack()
         return
 
-    columnas = filas[0]
-    datos = filas[1:]
+    columnas = filas[0] #se guardan encabezados de CSV
+    datos = filas[1:] #se guardan datos restantes
 
+    #se crea en tabla que muestra datos en filas y columnas
     tree = ttk.Treeview(ventana, columns=columnas, show="headings")
+    #Coloca treeview dentro de la ventana y lo expande
     tree.pack(fill=BOTH, expand=True)
 
     # Configurar encabezados
     for col in columnas:
         tree.heading(col, text=col)
+        #Configura ancho y alineacion
         tree.column(col, width=100, anchor="center")
 
     # Agregar filas
     for fila in datos:
+        #Se recorren todas las filas del CSV (excepto los encabezados).
         tree.insert("", "end", values=fila)
 
-    # Agregar scrollbar vertical
-    scrollbar = ttk.Scrollbar(ventana, orient="vertical", command=tree.yview)
-    tree.configure(yscrollcommand=scrollbar.set)
-    scrollbar.pack(side="right", fill="y")
 
 # Crear ventana principal
 root = Tk()
